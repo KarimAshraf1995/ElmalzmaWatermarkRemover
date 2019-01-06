@@ -1,9 +1,14 @@
 import cv2
 import numpy as np
 import time
+import datetime
 import fitz
 import sys
 import os
+
+def output_foldername():
+	now = datetime.datetime.now()
+	return 'output_'+now.strftime("%Y%m%d%H%M%S")
 
 def print_usage():	
 	print('\nUsage:\t python '+sys.argv[0]+ ' -p | -f | -s target -t threshold -i iterations\n')
@@ -20,6 +25,8 @@ def print_usage():
 def import_pdf(filename, iterations, threshold):
 	input = fitz.open(filename)	#input file	
 	print('Starting task for pdf file `' + filename + '`')
+	output_folder = output_foldername()
+	os.mkdir(output_folder)
 	n = 1
 	for i in range(len(input)):#Each page
 		for img in input.getPageImageList(i):
@@ -31,7 +38,7 @@ def import_pdf(filename, iterations, threshold):
 			data = np.fromstring(pix.getPNGData(), np.uint8) #convert to raw bytes
 			I = cv2.imdecode(data, cv2.IMREAD_UNCHANGED) #decode
 			I = remove_watermark(I, iterations, threshold)
-			cv2.imwrite('pdf_'+str(n)+'.jpg',I)
+			cv2.imwrite(os.path.join(output_folder, 'pdf_'+str(n)+'.jpg'), I)
 			print('Image #'+str(n)+'/'+str(len(input)))
 			n = n + 1
 
@@ -39,13 +46,15 @@ def import_pdf(filename, iterations, threshold):
 def import_folder(foldername, iterations, threshold):
 	files = os.listdir(foldername)
 	print('Starting task for folder `' + foldername + '`')
-	n=1
+	output_folder = os.path.join(foldername, output_foldername())
+	os.mkdir(output_folder)
+	n = 1
 	for file in files:
 		if file.endswith('.jpg') or file.endswith('.png'):
 			print(str(n)+'/'+str(len(files))+': '+file)
 			I = cv2.imread(os.path.join(foldername,file))
 			I = remove_watermark(I, iterations, threshold)
-			cv2.imwrite(os.path.join(foldername,file.split('.')[0]+'_filtered.jpg'),I)
+			cv2.imwrite(os.path.join(output_folder, file), I)
 			n = n + 1
 
 
@@ -53,7 +62,9 @@ def import_file(filename, iterations, threshold):
 	print('Starting task for image `' + filename + '`')
 	I = cv2.imread(filename)
 	I = remove_watermark(I, iterations, threshold)
-	cv2.imwrite(filename.split('.')[0]+'_filtered.jpg',I)
+	output_folder = output_foldername()
+	os.mkdir(output_folder)
+	cv2.imwrite(os.path.join(output_folder, filename), I)
 
 
 def remove_watermark(I, iterations, threshold):
@@ -98,7 +109,7 @@ def remove_watermark(I, iterations, threshold):
 
 if __name__ == "__main__":
 	
-	print('\nElmalzmaDechiper v0.0.1\n')
+	print('\nElmalzmaDechiper v0.0.2\n')
 	if len(sys.argv)!=7:
 		print_usage()
 	
