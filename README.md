@@ -44,6 +44,6 @@ python filterwm.py -s 2.jpg -t 53 -i 15
 
 * The script does not detect the edges of the paper. Please crop the images to include the paper only
 
-* The script will not work if the page is already copied, or the image is in grayscale or taken by a mobile phone in low light
+* The script may not work if the page is already copied, or the image is in grayscale or taken by a mobile phone in low light
 
 
