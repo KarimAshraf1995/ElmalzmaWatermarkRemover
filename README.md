@@ -1,6 +1,6 @@
-ElmalzmaDechiper
+ElmalzmaWatermarkRemover
 =======
-ElmalzmaDechiper is a python script that removes the annoying watermark that is typically found at your studying sheets using OpenCV
+ElmalzmaWatermarkRemover is a python script that removes the annoying watermark that is typically found at your studying sheets using OpenCV
 
 ## Running the script (basic instructions)
 * you need to install python 3 
@@ -24,20 +24,20 @@ Options:
 python filterwm.py -s 1.jpg -t 53 -i 9
 ```
 
-<img src="https://github.com/KarimAshraf1995/ElmalzmaDechiper/blob/master/examples/1.jpg?raw=true" width="25%" />
+<img src="https://github.com/KarimAshraf1995/ElmalzmaWatermarkRemover/blob/master/examples/1.jpg?raw=true" width="25%" />
 
 
-<img src="https://github.com/KarimAshraf1995/ElmalzmaDechiper/blob/master/examples/output_20190106184915/1.jpg?raw=true" width="25%" />
+<img src="https://github.com/KarimAshraf1995/ElmalzmaWatermarkRemover/blob/master/examples/output_20190106184915/1.jpg?raw=true" width="25%" />
 
 
 ```bash 
 python filterwm.py -s 2.jpg -t 53 -i 15
 ```
 
-<img src="https://github.com/KarimAshraf1995/ElmalzmaDechiper/blob/master/examples/2.jpg?raw=true" width="25%" />
+<img src="https://github.com/KarimAshraf1995/ElmalzmaWatermarkRemover/blob/master/examples/2.jpg?raw=true" width="25%" />
 
 
-<img src="https://github.com/KarimAshraf1995/ElmalzmaDechiper/blob/master/examples/output_20190106184915/2.jpg?raw=true" width="25%" />
+<img src="https://github.com/KarimAshraf1995/ElmalzmaWatermarkRemover/blob/master/examples/output_20190106184915/2.jpg?raw=true" width="25%" />
 
 ## Limitions 
 * Thershold level and number of iterations must be entered and they depend on the condition of the scanning. The best way to find the best values is trial and error. Typical values for thershold is in range 45 - 75 and 5 - 15 for number of iterations for good quality images
